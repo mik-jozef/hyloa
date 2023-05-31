@@ -1,0 +1,19 @@
+///
+  Entrypoint to the application.
+///
+
+import 'stdlib/io' as { WriteStream };
+
+lib-export class makeMain {
+  out: WriteStream;
+  
+  constructor({
+    out: WriteStream,
+  }) {
+    this.out = out;
+  }
+  
+  run() {
+    nowait out.write('Hello, world!');
+  }
+}

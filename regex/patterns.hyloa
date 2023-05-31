@@ -1,0 +1,19 @@
+import "stlib/reflect" as { fields, set }
+
+// TODO parent must be null.
+class ChildNodes(class Node extends SyntaxTreeNode) :=
+  MatchedNodes(Node.rule);
+
+export trait SyntaxTreeNode {
+  static hidden = false;
+  
+  static rule: Pattern;
+  
+  parent: SyntaxTreeNode<Any> | null = null;
+  
+  constructor(obj: ChildNodes(this.class)) {
+    fields(obj).forEach(let (field) := set(this, field.name, field(obj)));
+    
+    // TODO set up parent?
+  }
+}
